@@ -1,0 +1,9 @@
+var cleanCSS = require('gulp-clean-css');
+
+
+//Minify CSS: not in conflict with sass task?
+gulp.task('minify-css', () => {
+  return gulp.src('build/css')
+    .pipe(cleanCSS({compatibility: 'ie8'}))
+    .pipe(gulp.dest('build/css'));
+});

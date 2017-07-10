@@ -9,7 +9,7 @@ var sass = require('gulp-sass');
 //Concatenate & Minify JS Files
 gulp.task('scripts', function() {
     return gulp.src('src/js/*.js')
-      .pipe(concat('main.js'))
+		.pipe(concat('main.js'))
         .pipe(rename({suffix: '.min'}))
         .pipe(uglify())
         .pipe(gulp.dest('build/js'));
@@ -17,10 +17,14 @@ gulp.task('scripts', function() {
 
 //sass turns SCSS into built CSS
 gulp.task('sass', function () {
-  return gulp.src('src/scss/*.scss')
-    .pipe(sass.sync().on('error', sass.logError))
-    .pipe(gulp.dest('build/css'));
+	return gulp.src('src/scss/*.scss')
+		.pipe(concat('styles.css'))
+		.pipe(sass.sync().on('error', sass.logError))
+		.pipe(sass({outputStyle: 'compressed'}))
+		.pipe(rename({suffix: '.min'}))
+		.pipe(gulp.dest('build/css'));
 });
+
 
 //Watch for changes in files
 gulp.task('watch', function() {
